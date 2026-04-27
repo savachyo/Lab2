@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Резюме - Максим Боков</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. ГЛОБАЛЬНІ СТИЛІ (з коду 21 Savage) --- */
+        :root {
+            --bg-color: #1a1a1a;        /* Темний фон сторінки */
+            --card-bg: #2a2a2a;         /* Фон карток */
+            --accent-red: #e53935;      /* Основний червоний */
+            --link-color: #ff6b6b;      /* Світло-червоний для посилань */
+            --text-main: #f0f0f0;       /* Білий текст */
+            --text-secondary: #bbb;     /* Сірий текст */
+            --border-color: #444;       /* Колір рамок */
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        h2, h3 {
+            color: var(--accent-red);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        /* --- 2. HEADER (Flexbox + Стиль 21 Savage) --- */
+        header {
+            background-color: #111; /* Ще темніший для шапки */
+            padding: 30px 20px;
+            border-bottom: 3px solid var(--accent-red);
+
+            /* Flexbox */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-red); /* Червона рамка */
+            object-fit: cover;
+        }
+
+        .header-info h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            color: #fff;
+        }
+
+        .job-title {
+            color: var(--link-color); /* Світло-червоний */
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .header-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            text-align: right;
+        }
+
+        /* --- 3. ОСНОВНИЙ МАКЕТ (Grid) --- */
+        .cv-container {
+            max-width: 1100px; /* Трохи ширше ніж 900px, бо 2 колонки */
+            margin: 40px auto;
+            padding: 0 20px;
+
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        /* --- 4. СТИЛІ КАРТОК (Sidebar і Content) --- */
+        /* Це робить всі секції схожими на <article> з прикладу */
+        .sidebar-section, .content-section {
+            background-color: var(--card-bg);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- SIDEBAR --- */
+        /* Додамо стиль <aside> з прикладу (ліва червона лінія) */
+        .sidebar-section {
+            border-left: 4px solid var(--accent-red);
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+        .info-list li {
+            margin-bottom: 10px;
+        }
+
+        /* Навички (Grid всередині Sidebar) */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background-color: #333;
+            color: var(--text-main);
+            padding: 8px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 0.85em;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Прогрес-бар для мов */
+        .progress-bar {
+            background-color: #444;
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        .progress {
+            background-color: var(--accent-red); /* Червоний прогрес */
+            height: 100%;
+        }
+
+        /* --- MAIN CONTENT --- */
+
+        /* Досвід роботи */
+        .experience-item {
+            border-left: 2px solid #444;
+            padding-left: 20px;
+            margin-bottom: 30px;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 5px;
+        }
+
+        .exp-header h3 {
+            border-bottom: none; /* Прибираємо лінію під заголовком роботи */
+            padding-bottom: 0;
+            margin: 0;
+            color: #fff;
+        }
+
+        .date {
+            background-color: var(--accent-red);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .company {
+            color: var(--link-color);
+            font-style: italic;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Проєкти (Grid Gallery) */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background-color: #333;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-img {
+            height: 120px;
+            background-color: #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            border-bottom: 3px solid var(--accent-red);
+        }
+
+        .project-info {
+            padding: 15px;
+        }
+        .project-info h4 {
+            color: #fff;
+            margin: 0 0 10px 0;
+        }
+
+        /* --- 5. FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* --- АДАПТИВНІСТЬ --- */
+        @media (max-width: 768px) {
+            .cv-container {
+                grid-template-columns: 1fr; /* Одна колонка */
+            }
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .header-content {
+                flex-direction: column;
+            }
+            .header-contacts {
+                align-items: center;
+                text-align: center;
+            }
+            .sidebar-section {
+                border-left: none; /* На мобільному прибираємо бокову рамку */
+                border-top: 4px solid var(--accent-red); /* Робимо верхню */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <img src="photo_2025-05-22_20-32-00.jpg" alt="Фото" class="profile-photo">
+        <div class="header-info">
+            <h1>Максим Боков</h1>
+            <span class="job-title">Frontend Developer</span>
+        </div>
+    </div>
+    <div class="header-contacts">
+        <a href="tel:+380962446848">📞 +380 96 244 68 48</a>
+        <a href="m.bokov@htcolledge.sumdu.edu.ua">✉️ m.bokov@htcolledge.sumdu.edu.ua</a>
+        <a href="#">🌐 </a>
+    </div>
+</header>
+
+<div class="cv-container">
+
+    <aside class="sidebar">
+        <section class="sidebar-section">
+            <h3>Контакти</h3>
+            <ul class="info-list">
+                <li>📍 Шостка, Україна</li>
+                <li>✈️ Готовий до релокейту</li>
+                <li>💬 Telegram: @savachyo</li>
+            </ul>
+        </section>
+
+        <section class="sidebar-section">
+            <h3>Навички</h3>
+            <div class="skills-grid">
+                <div class="skill-tag">HTML5</div>
+                <div class="skill-tag">CSS3</div>
+                <div class="skill-tag">JavaScript</div>
+                <div class="skill-tag">React</div>
+                <div class="skill-tag">Git</div>
+                <div class="skill-tag">Figma</div>
+            </div>
+        </section>
+
+        <section class="sidebar-section">
+            <h3>Мови</h3>
+            <div style="margin-bottom: 10px;">
+                <span>Українська</span>
+                <div class="progress-bar"><div class="progress" style="width: 100%"></div></div>
+            </div>
+            <div>
+                <span>Англійська (B2)</span>
+                <div class="progress-bar"><div class="progress" style="width: 75%"></div></div>
+            </div>
+        </section>
+    </aside>
+
+    <main class="content">
+        <section class="content-section">
+            <h2>Про себе</h2>
+            <p>
+                Frontend розробник, який захоплюється створенням сучасних та зручних інтерфейсів.
+                Маю досвід роботи з адаптивною версткою та SPA додатками.
+                Стиль моєї роботи — це поєднання чистого коду та креативності.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h2>Досвід роботи</h2>
+
+            <div class="experience-item">
+                <div class="exp-header">
+                    <h3>Codes in colledge</h3>
+                    <span class="date">2024 - по цей день</span>
+                </div>
+                <span class="company">Colledge Named after Ivan Kozhedub</span>
+                <ul>
+                    <li>Розробка Css</li>
+                    <li>Розробка Html</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>Освіта</h2>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                <thead>
+                <tr style="background-color: #e53935; color: white;">
+                    <th style="padding: 10px; text-align: left;">Рік</th>
+                    <th style="padding: 10px; text-align: left;">Заклад / Ступінь</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr style="border-bottom: 1px solid #444;">
+                    <td style="padding: 10px;">2025</td>
+                    <td style="padding: 10px;">ВСП "Шосткинський фаховий коледж імені Івана Кожедуба Сумського державного університету"  <br><small style="color: #888;">Автоматизація, комп’ютерно- інтегровані технології та робототехніка</small></td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="content-section">
+            <h2>Проєкти</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">E-Commerce</div>
+                    <div class="project-info">
+                        <h4>Shop App</h4>
+                        <p style="font-size: 0.9em; color: #bbb;">Нажаль нiчого поки нема.</p>
+                        <a href="#">Переглянути код &rarr;</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">Dashboard</div>
+                    <div class="project-info">
+                        <h4>CRM System</h4>
+                        <p style="font-size: 0.9em; color: #bbb;">Нажаль нiчого поки нема.</p>
+                        <a href="#">Переглянути код &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<footer>
+    <div class="footer-socials">
+        <a href="https://github.com/savachyo">GitHub</a>
+        <a href="https://www.instagram.com/savachy0">Instagram</a>
+    </div>
+    <p>&copy; 2025 Максим Боков. Всі права захищено.</p>
+</footer>
+
+</body>
+</html>
